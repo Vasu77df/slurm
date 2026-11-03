@@ -368,6 +368,18 @@ file.
 Workload  Characterization  Key. An arbitrary  string  for  grouping orthogonal accounts.
 .IP
 
+.LP
+\fBNOTE\fR: SlurmDBD indexes account, cluster, federation, QOS, resource,
+TRES, user, and WCKey names on their first 42 characters, as well as the
+user, account, and partition of an association and the account and user of
+a coordinator.
+Names are stored in full up to 255 bytes, but two names that are identical
+in their first 42 characters are treated as the same name: adding the
+second one modifies the existing record instead of creating a new one.
+Keep names unique within their first 42 characters.
+This matters for hierarchical naming schemes in which many accounts share a
+long common prefix.
+
 .SH "GENERAL SPECIFICATIONS FOR ASSOCIATION BASED ENTITIES"
 \fBNOTE\fR: The group limits (GrpJobs, GrpTRES, etc.) are tested when a job is
 being considered for being allocated resources.
